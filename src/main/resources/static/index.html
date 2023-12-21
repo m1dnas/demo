@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Facturación Electrónica</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Facturación Electrónica de Productos</h1>
+
+    <label for="tipoCFE">Tipo de CFE:</label>
+    <select id="tipoCFE">
+        <option value="e-Factura">e-Factura</option>
+        <option value="e-Ticket">e-Ticket</option>
+        <option value="e-Remito">e-Remito</option>
+        <option value="e-Resguardo">e-Resguardo</option>
+    </select>
+    <br>
+
+    <label for="formaPago">Forma de Pago:</label>
+    <select id="formaPago">
+        <option value="debito">Débito</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="credito">Crédito</option>
+    </select>
+    <br>
+
+    <label for="moneda">Moneda:</label>
+    <select id="moneda">
+        <option value="USD">USD</option>
+        <option value="UYU">UYU</option>
+    </select>
+    <br>
+
+    <label for="cliente">Cliente:</label>
+    <input type="text" id="cliente" placeholder="Nombre del Cliente">
+    <br>
+
+    <label for="tipoDocumento">Tipo de Documento:</label>
+    <select id="tipoDocumento">
+        <option value="CI">CI</option>
+        <option value="Pasaporte">Pasaporte</option>
+    </select>
+    <br>
+
+    <label for="documento">Documento:</label>
+    <input type="text" id="documento" placeholder="Número de Documento">
+    <br>
+
+    <hr>
+    <h2>Líneas de Productos</h2>
+
+    <div id="productos" class="productos-row">
+        <!-- Aquí se agregarán las líneas de productos -->
+    </div>
+
+    <div id="totalCompra" class="total">
+        Total de la compra: $<span id="totalValue">0.00</span>
+    </div>
+
+    <button onclick="agregarProducto()">Agregar Producto</button>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
