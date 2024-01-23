@@ -14,6 +14,9 @@ import java.util.Date;
 
 public class XMLGenerator {
     public XMLGenerator(Integer cantItems) throws JAXBException {
+        JAXBContext jaxbcontext = JAXBContext.newInstance(CFE.class);
+        Marshaller marshaller = jaxbcontext.createMarshaller();
+
         CFE cfe = new CFE();
 
         // item
@@ -24,8 +27,6 @@ public class XMLGenerator {
 
         // todos los set con contenido dinámico o funciones creadas
 
-        JAXBContext jaxbcontext = JAXBContext.newInstance(CFE.class);
-        Marshaller marshaller = jaxbcontext.createMarshaller();
 
         File output = new File("src/"); // dirección donde se almacena
 

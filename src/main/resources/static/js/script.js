@@ -42,3 +42,81 @@ function calcularTotal() {
     totalCompra = total;
     document.getElementById('totalValue').innerText = totalCompra.toFixed(2);
 }
+
+async function logIn() {
+    let data = {};
+    data.email = document.getElementById('email').value;
+    data.password = document.getElementById('password').value;
+
+    const request = await fetch('api/login', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    const response = await request.text();
+    if (response != "FAIL") {
+        localStorage.token = response;
+        localStorage.email = data.email;
+        window.location.href = 'home.html';
+    } else {
+        alert("Incorrect log in");
+    }
+}
+
+async function sendXML() {
+    let data = {};
+
+    data.tipoCFE = document.getElementById('tipoCFE').value;
+    data.formaPago = document.getElementById('formaPago').value;
+    data.moneda = document.getElementById('moneda').value;
+    data.cliente = document.getElementById('cliente').value;
+    data.tipoDocumento = document.getElementById('tipoDocumento').value;
+    data.documento = document.getElementById('documento').value;
+    data.cantidad = productoCount;
+
+    const productos = document.getElementsByName('producto-item');
+    let informacionProductos= [];
+
+    for (let i = 1; i <= productos.length; i++) {
+        //const producto = productos[i];
+        let cantidad = document.getElementById('cantidad${' + i + '}').value;
+        let nombreProducto = document.getElementById('nombreProducto${' + i + '}').value;
+        let precio = document.getElementById('precio${' + i + '}');
+        let tasaIVA = document.getElementById('tasaIVA${' + i + '}');
+
+        let productoInfo = {
+            item: i,
+            cantidad: cantidad,
+            nombreProducto: nombreProducto,
+            precio: precio,
+            tasaIVA: tasaIVA
+        }
+        informacionProductos.push(productoInfo);
+    }
+
+    data.items = informacionProductos;
+
+    const request = await fetch('api/xml', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    /*
+    const response = await request.text();
+    if (response != "FAIL") {
+        console.log("Pago aceptado");
+        //localStorage.token = response;
+        //localStorage.email = data.email;
+        //window.location.href = 'home.html';
+    } else {
+        console.log("Pago rechazado");
+        //alert("Pago rechazado");
+    }*/
+    console.log(informacionProductos);
+}
