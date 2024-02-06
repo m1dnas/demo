@@ -1,7 +1,7 @@
 package com.cfe.demo.dao;
 
-import com.cfe.demo.models.CFE;
+import com.cfe.demo.models.ETck;
 
 public interface XmlDao {
-    void sendXml(CFE cfe);
+    void sendXml(ETck cfe);
 }

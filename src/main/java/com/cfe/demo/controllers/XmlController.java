@@ -1,6 +1,7 @@
 package com.cfe.demo.controllers;
 
-import com.cfe.demo.models.CFE;
+import com.cfe.demo.models.DatosCFE;
+import com.cfe.demo.models.ETck;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +17,16 @@ public class XmlController {
     //@Autowired
     private XmlDao xmlDao;
 
-    @RequestMapping(value = "api/xml", method = RequestMethod.POST)
-    public void sendXml(@RequestBody CFE cfe) throws JAXBException {
-
-        XMLGenerator newCFE = new XMLGenerator(2);
-        //xmlDao.sendXml(cfe);
+    @RequestMapping(value = "api/generar-xml", method = RequestMethod.POST)
+    public String generateXml(@RequestBody DatosCFE cfe) {
+        try {
+            XMLGenerator xml = new XMLGenerator();
+            xml.generateAndSaveXML(cfe);
+            return "XML generado existosamente";
+            //xmlDao.sendXml(cfe);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return "Error al generar el XML de la factura";
+        }
     }
 }

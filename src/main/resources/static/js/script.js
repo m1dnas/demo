@@ -31,7 +31,7 @@ function agregarProducto() {
 function calcularTotal() {
     let total = 0;
 
-    for (let i = 1; i < productoCount; i++) {
+    for (let i = 1; i <= productoCount; i++) {
         const cantidad = parseFloat(document.getElementById(`cantidad${i}`).value) || 0;
         const precio = parseFloat(document.getElementById(`precio${i}`).value) || 0;
         const productoTotal = cantidad * precio;
@@ -39,8 +39,7 @@ function calcularTotal() {
         document.getElementById(`total${i}`).innerText = productoTotal.toFixed(2);
     }
 
-    totalCompra = total;
-    document.getElementById('totalValue').innerText = totalCompra.toFixed(2);
+    document.getElementById('totalValue').innerText = total.toFixed(2);
 }
 
 async function logIn() {
@@ -66,26 +65,47 @@ async function logIn() {
     }
 }
 
-async function sendXML() {
+async function generateXML() {
     let data = {};
-
-    data.tipoCFE = document.getElementById('tipoCFE').value;
-    data.formaPago = document.getElementById('formaPago').value;
+    switch(document.getElementById('tipoCFE').value) {
+        case "e-Factura":
+            data.tipoCFE = 111;
+            break;
+        case "e-Ticket":
+            data.tipoCFE = 101;
+            break;
+        case "e-Remito":
+            data.tipoCFE = 181;
+            break;
+        case "e-Resguardo":
+            data.tipoCFE = 182;
+            break;
+    }
+    //data.tipoCFE = document.getElementById('tipoCFE').value;
+    switch(document.getElementById('formaPago').value) {
+        case "efectivo":
+            data.formaPago = 1;
+            break;
+        case "credito":
+            data.formaPago = 2;
+            break;
+    }
+    //data.formaPago = document.getElementById('formaPago').value;
     data.moneda = document.getElementById('moneda').value;
     data.cliente = document.getElementById('cliente').value;
     data.tipoDocumento = document.getElementById('tipoDocumento').value;
     data.documento = document.getElementById('documento').value;
-    data.cantidad = productoCount;
 
-    const productos = document.getElementsByName('producto-item');
+
+    const productos = document.getElementsByClassName('producto-item');
+
     let informacionProductos= [];
 
     for (let i = 1; i <= productos.length; i++) {
-        //const producto = productos[i];
-        let cantidad = document.getElementById('cantidad${' + i + '}').value;
-        let nombreProducto = document.getElementById('nombreProducto${' + i + '}').value;
-        let precio = document.getElementById('precio${' + i + '}');
-        let tasaIVA = document.getElementById('tasaIVA${' + i + '}');
+        let cantidad = document.getElementById('cantidad' + i).value;
+        let nombreProducto = document.getElementById('nombreProducto' + i).value;
+        let precio = document.getElementById('precio' + i).value;
+        let tasaIVA = document.getElementById('tasaIVA' + i).value;
 
         let productoInfo = {
             item: i,
@@ -97,9 +117,11 @@ async function sendXML() {
         informacionProductos.push(productoInfo);
     }
 
-    data.items = informacionProductos;
+    data.cantidad = productos.length;
+    data.producto = informacionProductos;
+    data.total = document.getElementById('totalValue').value;
 
-    const request = await fetch('api/xml', {
+    const request = await fetch('api/generar-xml', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -118,5 +140,5 @@ async function sendXML() {
         console.log("Pago rechazado");
         //alert("Pago rechazado");
     }*/
-    console.log(informacionProductos);
+    console.log(data);
 }

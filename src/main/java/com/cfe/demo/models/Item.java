@@ -1,39 +1,38 @@
 package com.cfe.demo.models;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Item")
 @XmlType(propOrder = {"NroLinDet", "IndFact", "NomItem", "Cantidad", "UniMedida", "PrecioUnitario", "MontoItem"})
 public class Item {
-    @XmlElement(name="NroLinDet")
+    @XmlElement(name="NroLinDet", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer nroLinDet;
+    private Integer NroLinDet;
 
-    @XmlElement(name="IndFact")
+    @XmlElement(name="IndFact", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer indFact;
+    private Integer IndFact;
 
-    @XmlElement(name="NomItem")
+    @XmlElement(name="NomItem", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String nombreItem;
+    private String NomItem;
 
-    @XmlElement(name="Cantidad")
+    @XmlElement(name="Cantidad", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer cantidad;
+    private Integer Cantidad;
 
-    @XmlElement(name="UniMedida")
+    @XmlElement(name="UniMedida", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String unidadMedida;
+    private String UniMedida;
 
-    @XmlElement(name="PrecioUnitario")
+    @XmlElement(name="PrecioUnitario", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer precioUnitario;
+    private Integer PrecioUnitario;
 
-    @XmlElement(name="MontoItem")
+    @XmlElement(name="MontoItem", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer montoItem;
+    private Integer MontoItem;
 }

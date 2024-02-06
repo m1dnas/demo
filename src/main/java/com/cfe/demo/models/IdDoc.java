@@ -1,35 +1,43 @@
 package com.cfe.demo.models;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name= "IdDoc")
+@XmlType(propOrder = {"TipoCFE", "Serie", "Nro", "FchEmis", "MntBruto", "FmaPago", "FchVenc"})
 public class IdDoc {
-    @XmlElement(name="TipoCFE")
+    @XmlElement(name="TipoCFE", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer tipoCFE;
+    private Integer TipoCFE;
 
-    @XmlElement(name="Serie")
+    @XmlElement(name="Serie", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String serie; // ALPHA 2
+    private String Serie; // ALPHA 2
 
-    @XmlElement(name="Nro")
+    @XmlElement(name="Nro", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer num; // NUM 7 - asignado al comprobante; 1 <= nro <= 9999999
+    private Integer Nro; // NUM 7 - asignado al comprobante; 1 <= nro <= 9999999
 
-    @XmlElement(name="FchEmis")
+    @XmlElement(name="FchEmis", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String fechaEmision; // (2013-05-11) - fecha del comprobante; hacer función
+    private String FchEmis; // (2013-05-11) - fecha del comprobante; hacer función
 
-    @XmlElement(name="MntBruto")
+    @XmlElement(name="MntBruto", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer montoBruto; // NUM 1
+    private int MntBruto; // NUM 1
 
-    @XmlElement(name="FmaPago")
+    @XmlElement(name="FmaPago", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer formaPago; // NUM 1
+    private int FmaPago; // NUM 1
 
-    @XmlElement(name="fchVenc")
+    @XmlElement(name="FchVenc", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String fechaVenc; // (2013-08-21)
+    private String FchVenc; // (2013-08-21)
 }

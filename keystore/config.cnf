@@ -1,0 +1,32 @@
+# config.cnf
+
+[ ca ]
+default_ca = my_ca
+
+[ my_ca ]
+dir = /mnt/c/Users/Felipe/Desktop/demo/keystore/ca
+certs = $dir/certs
+crl_dir = $dir/crl
+database = $dir/index
+new_certs_dir = $dir/certs/newcerts
+private_key = $dir/certs/private/cakey.pem
+certificate = $dir/certs/cacert.pem
+serial = $dir/certs/serial
+default_md = sha256
+policy = my_ca_policy
+email_in_dn = felipesandimguliermone@gmail.com
+
+[ my_ca_policy ]
+countryName = match
+stateOrProvinceName = optional
+organizationName = match
+organizationalUnitName = optional
+commonName = supplied
+emailAddress = optional
+
+[ req_distinguished_name ]
+countryName = UY
+stateOrProvinceName = Montevideo
+localityName =
+organizationName =
+commonName = Felipe Sandim

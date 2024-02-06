@@ -1,50 +1,19 @@
 package com.cfe.demo.models;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElementWrapper;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@XmlRootElement(name = "CFE")
-@XmlType(propOrder={"Encabezaado, Detalle, CAEData"})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="CFE", namespace = "http://cfe.dgi.gub.uy")
+@XmlType(propOrder = {"eTck"})
 public class CFE {
+    @XmlAttribute
     @Getter @Setter
-    private int id;
+    private String version;
 
-    @XmlElement(name="Encabezado")
+
+    @XmlElement(name = "eTck", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Encabezado encabezado;
-
-    @XmlElementWrapper(name="Detalle")
-    @XmlElement(name="Item")
-    @Getter @Setter
-    private Detalle detalle;
-
-    @XmlElement(name="CAEData")
-    @Getter @Setter
-    private CAEData caeData;
-
-    // ** EMPIEZA ENCABEZADO **
-
-    // >> ÁREA IDENTIFICACIÓN DEL COMPROBANTE <<
-
-
-    // >> ÁREA EMISOR <<
-
-
-    // >> ÁREA RECEPTOR <<
-
-
-    // ** TERMINA ENCABEZADO **
-    // ** EMPIEZA DETALLE **
-
-    // >> ÁREA ITEM << (pueden haber varios items)
-
-    // ** TERMINA DETALLE **
-    // ** EMPIEZA CAE Data **
-
-
-    // PÁG 48 FORMATO CFE ENCABEZADO TERMINO, EMPIEZA DETALLE
+    private ETck eTck;
 }

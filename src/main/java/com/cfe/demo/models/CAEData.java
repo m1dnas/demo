@@ -1,27 +1,26 @@
 package com.cfe.demo.models;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "CAEData")
 @XmlType(propOrder={"CAE_ID", "DNro", "HNro", "FecVenc"})
 public class CAEData {
-    @XmlElement(name="CAE_ID")
+    @XmlElement(name="CAE_ID", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer caeId;
+    private Integer CAE_ID;
 
-    @XmlElement(name="DNro")
+    @XmlElement(name="DNro", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer dNro;
+    private Integer DNro;
 
-    @XmlElement(name="HNro")
+    @XmlElement(name="HNro", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer hNro;
+    private Integer HNro;
 
-    @XmlElement(name="FecVenc")
+    @XmlElement(name="FecVenc", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String fechaVencimiento;
+    private String FecVenc;
 }

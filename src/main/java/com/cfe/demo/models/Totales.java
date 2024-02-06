@@ -1,51 +1,54 @@
 package com.cfe.demo.models;
 
-import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Totales")
+@XmlType(propOrder={"TpoMoneda", "MntNoGrv", "MntNetoIvaTasaMin", "MntNetoIVATasaBasica", "IVATasaMin", "IVATasaBasica", "MntIVATasaMin", "MntIVATasaBasica", "MntTotal", "CantLinDet", "MntPagar"})
 public class Totales {
-    @XmlElement(name="TpoMoneda")
+    @XmlElement(name="TpoMoneda", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String tipoMoneda; // ALPHA 3
+    private String TpoMoneda; // ALPHA 3
 
-    @XmlElement(name="MntNoGrv")
+    @XmlElement(name="MntNoGrv", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer montoNoGrv; // NUM 17
+    private Integer MntNoGrv; // NUM 17
 
-    @XmlElement(name="MntNetoIvaTasaMin")
+    @XmlElement(name="MntNetoIvaTasaMin", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer mntNetoIvaTasaMin;
+    private Integer MntNetoIvaTasaMin;
 
-    @XmlElement(name="MntNetoIVATasaBasica")
+    @XmlElement(name="MntNetoIVATasaBasica", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Double mntNetoIvaTasaBasica;
+    private Double MntNetoIVATasaBasica;
 
-    @XmlElement(name="IVATasaMin")
+    @XmlElement(name="IVATasaMin", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer ivaTasaMin;
+    private Integer IVATasaMin;
 
-    @XmlElement(name="IVATasaBasica")
+    @XmlElement(name="IVATasaBasica", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer ivaTasaBasica;
+    private Integer IVATasaBasica;
 
-    @XmlElement(name="MntIVATasaMin")
+    @XmlElement(name="MntIVATasaMin", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer montoIvaTasaMin;
+    private Integer MntIVATasaMin;
 
-    @XmlElement(name="MntIVATasaBasica")
+    @XmlElement(name="MntIVATasaBasica", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Double montoIvaTasaBasica;
+    private Double MntIVATasaBasica;
 
-    @XmlElement(name="MntTotal")
+    @XmlElement(name="MntTotal", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer montoTotal;
+    private Integer MntTotal;
 
-    @XmlElement(name="CantLinDet")
+    @XmlElement(name="CantLinDet", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer cantLinDet;
+    private Integer CantLinDet;
 
-    @XmlElement(name="MntPagar")
+    @XmlElement(name="MntPagar", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer montoPagar;
+    private Integer MntPagar;
 }

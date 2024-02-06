@@ -1,27 +1,27 @@
 package com.cfe.demo.models;
 
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
-@XmlRootElement(name = "Encabezado")
-@XmlType(propOrder={"IdDoc", "Emisor", "Receptor", "Totaleas"})
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name= "Encabezado")
+@XmlType(propOrder={"IdDoc", "Emisor", "Receptor", "Totales"})
 public class Encabezado {
-    @XmlElement(name="IdDoc")
+    @XmlElement(name="IdDoc", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private IdDoc idDoc;
+    private IdDoc IdDoc;
 
-    @XmlElement(name="Emisor")
+    @XmlElement(name="Emisor", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Emisor emisor;
+    private Emisor Emisor;
 
-    @XmlElement(name="Receptor")
+    @XmlElement(name="Receptor", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Receptor receptor;
+    private Receptor Receptor;
 
-    @XmlElement(name="Totales")
+    @XmlElement(name="Totales", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Totales totales;
+    private Totales Totales;
 }

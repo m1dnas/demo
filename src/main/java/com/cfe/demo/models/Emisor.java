@@ -1,35 +1,34 @@
 package com.cfe.demo.models;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 
-//@XmlRootElement(name = "Emisor")
-//@XmlType(propOrder={"RUCEmisor", "RznSoc", "CdgDGISucur", "DomFiscal", "Ciudad", "Departamento"})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Emisor")
+@XmlType(propOrder={"RUCEmisor", "RznSoc", "CdgDGISucur", "DomFiscal", "Ciudad", "Departamento"})
 public class Emisor {
-    @XmlElement(name="RUCEmisor")
+    @XmlElement(name="RUCEmisor", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String rucEmisor; // NUM 12 tipo string pq es 12
+    private String RUCEmisor; // NUM 12 tipo string pq es 12
 
-    @XmlElement(name="RznSoc")
+    @XmlElement(name="RznSoc", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String razonSocial;
+    private String RznSoc;
 
-    @XmlElement(name="CdgDGISucur")
+    @XmlElement(name="CdgDGISucur", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private Integer cdgDgiSucur; // NUM 4; codigo numerico entregado por la DGI q identifica a la casa principal o a ala sucursal donde se realiza la operación
+    private Integer CdgDGISucur; // NUM 4; codigo numerico entregado por la DGI q identifica a la casa principal o a ala sucursal donde se realiza la operación
 
-    @XmlElement(name="DomFiscal")
+    @XmlElement(name="DomFiscal", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String domicilioFiscal; // ALPHA 70
+    private String DomFiscal; // ALPHA 70
 
-    @XmlElement(name="Ciudad")
+    @XmlElement(name="Ciudad", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String ciudad;
+    private String Ciudad;
 
-    @XmlElement(name="Departamento")
+    @XmlElement(name="Departamento", namespace = "http://cfe.dgi.gub.uy")
     @Getter @Setter
-    private String departamento;
+    private String Departamento;
 }

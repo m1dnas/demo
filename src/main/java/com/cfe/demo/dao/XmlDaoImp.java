@@ -1,17 +1,20 @@
 package com.cfe.demo.dao;
 
-import com.cfe.demo.models.CFE;
+import com.cfe.demo.models.ETck;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @Repository
 @Transactional
-public class XmlDaoImp () {
+public class XmlDaoImp {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Override
-    public void sendXml (CFE cfe) {
-        entityManager.merge(cfe);
+
+    public void sendXml (ETck eTck) {
+        entityManager.merge(eTck);
     }
 }
