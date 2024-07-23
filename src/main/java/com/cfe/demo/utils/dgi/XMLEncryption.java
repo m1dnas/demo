@@ -1,8 +1,12 @@
 package com.cfe.demo.utils.dgi;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.security.Key;
+import org.apache.xml.security.encryption.EncryptedData;
+import org.apache.xml.security.encryption.EncryptedKey;
+import org.apache.xml.security.encryption.XMLCipher;
+import org.apache.xml.security.keys.KeyInfo;
+import org.apache.xml.security.utils.EncryptionConstants;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -13,13 +17,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import org.apache.xml.security.encryption.EncryptedData;
-import org.apache.xml.security.encryption.EncryptedKey;
-import org.apache.xml.security.encryption.XMLCipher;
-import org.apache.xml.security.keys.KeyInfo;
-import org.apache.xml.security.utils.EncryptionConstants;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.io.*;
+import java.security.Key;
 
 
 public class XMLEncryption {
@@ -31,7 +30,22 @@ public class XMLEncryption {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
         DocumentBuilder db = dbf.newDocumentBuilder();
-        return db.parse(fileName);
+
+        File file = new File(fileName);
+        if (!file.exists()) {
+            throw new FileNotFoundException("El archivo no se encontró: " + fileName);
+        }
+
+        System.out.println("Contenido del archivo antes de analizar:");
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
+
+        Document document = db.parse(file);
+        return document;
     }
 
     private static SecretKey generateSymmetricKey() throws Exception {
@@ -55,6 +69,17 @@ public class XMLEncryption {
                                Key publicKey, String keyName ) throws Exception {
         // Lee XML desde archivo
         Document document = parseFile(source);
+        System.out.println(document);
+
+        System.out.println("Acà tenemos: " + document.getDocumentElement().getElementsByTagNameNS(
+                ns, element).item(0));
+        System.out.println("LOS ATTRIBUTES: " + document.getAttributes());
+        System.out.println(document.getChildNodes().getLength());
+        System.out.println("EL PRIMER CHILD: " + document.getFirstChild().toString());
+        System.out.println("EL text content: " + document.getTextContent());
+        System.out.println("El get document element: " + document.getDocumentElement());
+        System.out.println("El document namespaceURI: " + document.getNamespaceURI());
+        System.out.println("LOS CHILD NODES: " + document.getChildNodes());
 
         // Genera clave simétrica para TripleDes
         Key symmetricKey = generateSymmetricKey();
@@ -90,6 +115,8 @@ public class XMLEncryption {
         KeyInfo keyInfo = new KeyInfo(document);
         keyInfo.add(encryptedKey);
         encryptedDataElement.setKeyInfo(keyInfo);
+
+        System.out.println(document + " ----- " + elementToEncrypt.getTagName());
 
         // Cifra
         xmlCipher.doFinal(document, elementToEncrypt);

@@ -13,7 +13,7 @@ public class CFE {
     private String version;
 
 
-    @XmlElement(name = "eTck", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name = "eTck")
     @Getter @Setter
     private ETck eTck;
 }

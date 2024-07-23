@@ -1,18 +1,25 @@
 package com.cfe.demo.utils.marshallers;
 
 import com.cfe.demo.models.*;
+import com.cfe.demo.utils.dgi.XMLEncryption;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.StringWriter;
+import java.security.Key;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.security.spec.X509EncodedKeySpec;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 public class XMLGenerator {
@@ -117,14 +124,36 @@ public class XMLGenerator {
         File outputDirectory = new File("src/main/resources/static");
         outputDirectory.mkdirs();
 
-        File outputFile = new File(outputDirectory, "CFE.xml");
+        File outputFile = new File(outputDirectory, "SinEncriptar.xml");
 
         marshaller.marshal(cfe, outputFile);
 
         System.out.println("XML generado y guardado en: " + outputFile.getAbsolutePath());
+
+        XMLEncryption encryption = new XMLEncryption();
+
+        encryption.encrypt(outputFile.getAbsolutePath(), "src/main/resources/static/Encriptado.xml", "http://cfe.dgi.gub.uy", "CFE", loadPublicKeyFromPEM("keystore/DGI_RUC219999830019.pem"), "CERT_DGI_EFACTURA");
+
     } catch (JAXBException e) {
         e.printStackTrace();
+    } catch (Exception e) {
+        throw new RuntimeException(e);
     }
+    }
+
+    public static Key loadPublicKeyFromPEM(String pemFilePath) throws Exception {
+        FileInputStream fis = new FileInputStream(pemFilePath);
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+        X509Certificate cert = (X509Certificate) cf.generateCertificate(fis);
+        fis.close();
+
+        // Extraer la clave pública del certificado
+        PublicKey publicKey = cert.getPublicKey();
+
+        // Convertir la clave pública en un objeto Key
+        KeyFactory keyFactory = KeyFactory.getInstance(publicKey.getAlgorithm());
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKey.getEncoded());
+        return keyFactory.generatePublic(keySpec);
     }
 
     public static String fechaActual() {

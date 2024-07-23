@@ -7,24 +7,23 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name= "eTck")
 @XmlType(propOrder={"TmstFirma", "Encabezado", "Detalle", "CAEData"})
 public class ETck {
 
-    @XmlElement(name = "TmstFirma", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name = "TmstFirma")
     @Getter @Setter
     private String TmstFirma;
 
-    @XmlElement(name="Encabezado", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="Encabezado")
     @Getter @Setter
     private Encabezado Encabezado;
 
-    @XmlElementWrapper(name= "Detalle", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElementWrapper(name= "Detalle")
     @XmlElement(name="Item")
     @Getter @Setter
     private ArrayList<Item> Detalle;
 
-    @XmlElement(name="CAEData", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="CAEData")
     @Getter @Setter
     private CAEData CAEData;
 

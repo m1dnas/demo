@@ -5,34 +5,33 @@ import lombok.Getter;
 import lombok.Setter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Item")
-@XmlType(propOrder = {"NroLinDet", "IndFact", "NomItem", "Cantidad", "UniMedida", "PrecioUnitario", "MontoItem"})
+@XmlType(name = "Item", propOrder = {"NroLinDet", "IndFact", "NomItem", "Cantidad", "UniMedida", "PrecioUnitario", "MontoItem"})
 public class Item {
-    @XmlElement(name="NroLinDet", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="NroLinDet")
     @Getter @Setter
     private Integer NroLinDet;
 
-    @XmlElement(name="IndFact", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="IndFact")
     @Getter @Setter
     private Integer IndFact;
 
-    @XmlElement(name="NomItem", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="NomItem")
     @Getter @Setter
     private String NomItem;
 
-    @XmlElement(name="Cantidad", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="Cantidad")
     @Getter @Setter
     private Integer Cantidad;
 
-    @XmlElement(name="UniMedida", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="UniMedida")
     @Getter @Setter
     private String UniMedida;
 
-    @XmlElement(name="PrecioUnitario", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="PrecioUnitario")
     @Getter @Setter
     private Integer PrecioUnitario;
 
-    @XmlElement(name="MontoItem", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="MontoItem")
     @Getter @Setter
     private Integer MontoItem;
 }

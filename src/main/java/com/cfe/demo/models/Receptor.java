@@ -5,10 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Receptor")
-@XmlType(propOrder={"TipoDocRecep", "CodPaisRecep", "DocRecep", "RznSocRecep", "DirRecep", "CiudadRecep", "DeptoRecep"})
+@XmlType(name = "Receptor", namespace = "http://cfe.dgi.gub.uy", propOrder = {
+        "TipoDocRecep",
+        "CodPaisRecep",
+        "DocRecep",
+        "RznSocRecep",
+        "DirRecep",
+        "CiudadRecep",
+        "DeptoRecep"
+})
 public class Receptor {
-    @XmlElement(name="TipoDocRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="TipoDocRecep")
     @Getter @Setter
     private Integer TipoDocRecep; // NUM 2
     /*
@@ -31,27 +38,27 @@ extranjero (todos los
 países
      */
 
-    @XmlElement(name="CodPaisRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="CodPaisRecep")
     @Getter @Setter
     private String CodPaisRecep; // ALPHA 2
 
-    @XmlElement(name="DocRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="DocRecep")
     @Getter @Setter
     private int DocRecep; // NUM 12
 
-    @XmlElement(name="RznSocRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="RznSocRecep")
     @Getter @Setter
     private String RznSocRecep; // ALPHA 150
 
-    @XmlElement(name="DirRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="DirRecep")
     @Getter @Setter
     private String DirRecep; // ALPHA 70
 
-    @XmlElement(name="CiudadRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="CiudadRecep")
     @Getter @Setter
     private String CiudadRecep; // ALPHA 30
 
-    @XmlElement(name="DeptoRecep", namespace = "http://cfe.dgi.gub.uy")
+    @XmlElement(name="DeptoRecep")
     @Getter @Setter
     private String DeptoRecep; // ALPHA 30
 }
